@@ -3,8 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var hbs = require('hbs');
+var moment = require('moment');
 
 var indexRouter = require('./routes/index');
+
+hbs.registerHelper('capitalize', function(str) {
+  if (str && typeof str === "string") {
+    return str.replace(/\b\w/g, function(l){ return l.toUpperCase() });
+  }
+  return '';
+});
+
+hbs.registerHelper('getFormattedDate', function(date) {
+  return moment(date).format("dddd, MMMM Do YYYY, h:mm:ss a");;
+});
 
 var app = express();
 
