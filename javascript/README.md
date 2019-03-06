@@ -8,8 +8,9 @@ This is a server-side web application written in JavaScript with
     npm install
 
 ## Running
+This project uses [nodemon](https://nodemon.io/) to add livereload to our express server.
 
-    DEBUG=js-upcoming-elections:* npm start
+    npm run devstart
 
 ## Testing
 
