@@ -3,18 +3,22 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "devstart": "nodemon ./bin/www",
     "start": "node ./bin/www",
     "test": "./node_modules/.bin/tap test/*.js"
   },
   "devDependencies": {
+    "nodemon": "1.18.10",
     "tap": "~12.5.1"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "hbs": "~4.0.1",
+    "hbs": "4.0.3",
     "http-errors": "~1.6.2",
-    "morgan": "~1.9.0"
+    "moment": "2.24.0",
+    "morgan": "~1.9.0",
+    "node-fetch": "2.3.0"
   }
 }
