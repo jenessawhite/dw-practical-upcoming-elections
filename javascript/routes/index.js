@@ -22,7 +22,26 @@ function getElectionInfo(state, place) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Find My Election', states: us_states });
+  res.render('index', {
+    title: 'Find My Election',
+    states: us_states
+  });
+});
+
+// FORM SUBMISSION
+router.post('/search', function(req, res) {
+  // get items from our form that we need for our api call
+  // state and city need to be lowercase and have all spaces as underscores
+  const state = req.body.state.toLowerCase();
+  const place = req.body.city.toLowerCase().replace(/ /g, '_');
+
+  Promise.all([getElectionInfo(state, place)]).then(electionInfo => {
+    // Render our results page with data
+    res.render('search', {
+      title: 'Your Election Info',
+      electionInfo: electionInfo[0]
+    });
+  });
 });
 
 module.exports = router;
