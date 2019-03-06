@@ -1,0 +1,71 @@
+<div class="search-results">
+  <h1>{{title}}</h1>
+  <a href="/">Back to Home</a>
+
+  <div>
+    {{#if electionInfo}}
+    <h2>{{electionInfo.description}}</h2>
+    <p>This election will happen on {{getFormattedDate electionInfo.date}}</p>
+    <p>For more information on this election please visit the <a href="{{electionInfo.website}}"
+        target="_blank">website.</a></p>
+    <p>You can find your polling place <a href="{{electionInfo.polling-place-url}}" target="_blank">here.</a></p>
+
+    <h3>Details:</h3>
+    <ul>
+      {{#each electionInfo.district-divisions}}
+      <li>
+        <strong>Voter registration authority level:</strong> {{capitalize this.voter-registration-authority-level}}
+        <br>
+        <i>Note: Voter registration authority level is the level of election the voter must be able to vote in order to
+          participate in this election.</i>
+      </li>
+      <li>
+        <strong>Election authority level:</strong> {{capitalize this.election-authority-level}}
+      </li>
+
+      <div>
+        <h3>Voting Methods:</h3>
+        <ul>
+          {{#each voting-methods}}
+          <li>{{capitalize type}}
+            {{#if primary}}(This is the primary method for this election){{/if}}
+            {{#if excuse-required}}You must provide the following information by
+            {{getFormattedDate ballot-request-deadline-received}}:
+            <ul>
+              {{#each acceptable-forms}}
+              <li>{{name}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+            {{#each instructions}}
+            <p>{{this}}</p>
+            {{/each}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div>
+        <h3> How to register to vote for this election: </h3>
+        <ul>
+          {{#each voter-registration-methods}}
+          <li>{{capitalize type}}
+            <br>
+            {{#if deadline-online}}You must submit this information by: {{getFormattedDate deadline-online}}{{/if}}
+            {{#if deadline-postmarked}}You must postmark this information by: {{getFormattedDate deadline-postmarked}}{{/if}}
+            
+            {{#each instructions}}
+            <p>{{this}}</p>
+            {{/each}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/each}}
+
+    </ul>
+
+    {{else}}
+    <p>There are currently no upcoming elections. Please check back later.</p>
+    {{/if}}
+  </div>
+</div>
